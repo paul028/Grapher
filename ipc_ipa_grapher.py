@@ -11,13 +11,13 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
-df = pd.read_csv('0.1-1mV.csv')
+df = pd.read_csv('1.1-2mV.csv')
 print (df)
 v=list()
 current=list()
 v_scan=list()
 sqrt_vscan=list()
-for i in range(1,10,1):
+for i in range(11,20,1):
     v_scan.append((i+1)/10)#10)
     sqrt_vscan.append(np.sqrt((i+1)/10))#10))
     temp = df[str((i+1)/10)+'v'].values
