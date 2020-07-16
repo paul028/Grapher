@@ -42,7 +42,7 @@ def bubble_func(rt,f):
             
     if (np.abs((rt-test)/rt))>er:
         while (np.abs((rt-test)/rt))>er:
-            test=(0.13/f)*np.sqrt(p_inf/rho)*np.sqrt((2/3)*(p-1))
+            test=(0.3/f)*np.sqrt(p_inf/rho)*np.sqrt((2/3)*(p-1))
             #print(test)
             if (np.abs((rt-test)/rt))<=er:
                 print()
@@ -61,3 +61,4 @@ for x in range(trans_freq.size):
     for y in range(r_bubble.size):
         print("Calculating bubble size=",r_bubble[y],"um at f=",trans_freq[x],"kHz")
         tresh_pres[x][y]=bubble_func(r_bubble[y],trans_freq[x]*1000)
+plt.scatter(r_bubbe,tresh_pres)
