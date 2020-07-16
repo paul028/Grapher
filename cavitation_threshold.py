@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 
 p_inf=101325
 rho=8635
-trans_freq=np.array([36,42,83,74,150,300]) # frequency in Hz
+trans_freq=np.array([20]) # frequency in Hz
 r_bubble=np.array([10,20,30,40,50,60,70]) #bubble radius in micro meter
 tresh_pres= np.zeros((trans_freq.size,r_bubble.size))
-er=0.05
+er=0.01
 def bubble_func(rt,f):
     increment=0.00001 #p value increment
     rt= rt*0.0000010000
