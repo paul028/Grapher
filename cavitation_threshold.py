@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 p_inf=101325
 rho=8635
 trans_freq=np.array([36,42,83,74,150,300]) # frequency in Hz
-r_bubble=np.array([10,20,30,40,50,60,70,80,90,100]) #bubble radius in micro meter
+r_bubble=np.array([10,20,30,40,50,60,70]) #bubble radius in micro meter
 tresh_pres= np.zeros((trans_freq.size,r_bubble.size))
-
+er=0.05
 def bubble_func(rt,f):
     increment=0.00001 #p value increment
     rt= rt*0.0000010000
@@ -22,7 +22,7 @@ def bubble_func(rt,f):
     while p<=11:
         test=(0.13/f)*np.sqrt(p_inf/rho)*(((p-1)/np.sqrt(p))*np.cbrt(1+ ((2/3)*(p-1))))
         #print(test)
-        if (np.abs((rt-test)/rt))<=0.01:
+        if (np.abs((rt-test)/rt))<=er:
             print()
             print("Estimated Error:",((rt-test)/rt))
             print("P seach successfully")
@@ -30,7 +30,7 @@ def bubble_func(rt,f):
             print()
             print(r'$P_t=$',(p*p_inf))
             return p*p_inf;
-        if  (np.abs((rt-test)/rt))>0.01:
+        if  (np.abs((rt-test)/rt))>er:
             p= p+increment
             test=0
             print("Testing another p for r_t=",(rt/0.0000010000))
@@ -40,18 +40,18 @@ def bubble_func(rt,f):
             p=p+increment
         print(p)
             
-    if (np.abs((rt-test)/rt))>0.01:
-        while (np.abs((rt-test)/rt))>0.01:
+    if (np.abs((rt-test)/rt))>er:
+        while (np.abs((rt-test)/rt))>er:
             test=(0.13/f)*np.sqrt(p_inf/rho)*np.sqrt((2/3)*(p-1))
             #print(test)
-            if (np.abs((rt-test)/rt))<=0.01:
+            if (np.abs((rt-test)/rt))<=er:
                 print()
                 print("Estimated Error:",((rt-test)/rt))
                 print("P seach successfully")
                 print(p)
                 print()
                 return p*p_inf;
-            if (np.abs((rt-test)/rt))>0.01:
+            if (np.abs((rt-test)/rt))>er:
                 p= p+increment
                 test=0
                 print("Testing another p for r_t=",(rt/0.0000010000))
