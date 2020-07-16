@@ -11,20 +11,20 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
-df = pd.read_csv('1.1-2mV.csv')
+df = pd.read_csv('cv_comparison_egan.csv')
 print (df)
 v=list()
 current=list()
 v_scan=list()
 sqrt_vscan=list()
-for i in range(11,20,1):
-    v_scan.append((i+1)/10)#10)
-    sqrt_vscan.append(np.sqrt((i+1)/10))#10))
-    temp = df[str((i+1)/10)+'v'].values
+for i in range(1,3,1):
+    v_scan.append((i))#10)
+    sqrt_vscan.append(np.sqrt((i+1)))#10))
+    temp = df['0.'+str((i))+'v'].values
     temp=np.delete(temp,0)
     temp=temp.astype('float64')    
     
-    temp2 = df[str((i+1)/10)+'i'].values
+    temp2 = df['0.'+str((i))+'i'].values
     temp2=np.delete(temp2,0)
     temp2=temp2.astype('float64')    
     v.append(temp)
@@ -61,8 +61,8 @@ plt.plot(sqrt_vscan,max_i)
 #plt.text(0.6, 0.5, 'R-squared = %0.2f' % r_squared)
 plt.legend([r'$I_{p,c}$',r'$I_{p,a}$'],loc=2)
 #plt.title(r' $I_p$ vs $\sqrt{\nu} $ at $c=3$M ')
-plt.title(r' $I_p$ vs $\sqrt{\nu} $ at $c=4$M & $\omega=0$RPM')
-plt.ylabel(r'$I_p$(A)')
+plt.title(r' $I_p$ vs $\sqrt{\nu} $ at $c=4.7$M')
+plt.ylabel(r'$I_p$(mA)')
 plt.xlabel(r'$\sqrt{\nu}$')
 plt.savefig('sqrt.png', dpi=600)
 
@@ -74,8 +74,8 @@ plt.plot(v_scan,max_i)
 
 plt.legend([r'$I_{p,c}$',r'$I_{p,a}$'],loc=2)
 #plt.title(r' $I_p$ vs $\sqrt{\nu} $ at $c=3$M ')
-plt.title(r' $I_p$ vs $\nu $ at $c=4$M & $\omega=0$RPM')
-plt.ylabel(r'$I_p$(A)')
+plt.title(r' $I_p$ vs $\nu $ at $c=4.7$M')
+plt.ylabel(r'$I_p$(mA)')
 plt.xlabel(r'$\nu$')
 
 plt.savefig('normal.png', dpi=500)
@@ -84,6 +84,7 @@ plt.show()
 #no3 test
 plt.scatter(v_scan,ratio_ipia)
 plt.plot(v_scan,ratio_ipia)
+plt.title("Peak Current Ratio")
 plt.ylabel(r'|$I_{p,a}/I_{p,c}$|')
 plt.xlabel(r'$\nu$  $(mVs^{-1})$')
 plt.savefig('3 ratio_ip_ia.png', dpi=500)
